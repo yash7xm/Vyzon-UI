@@ -1,7 +1,7 @@
 const Spec = [
     // --------------------------------------
     // Whitespace:
-    [/^\s+/, null],
+    [/^\s+/, 'space'],
 
     // --------------------------------------
     // Comments:
@@ -41,7 +41,7 @@ const Spec = [
 
     // --------------------------------------
     // Keywords
-    [/^\blet\b/, 'blue'],
+    [/^\blet\b/, 'let'],
     [/^\bif\b/, 'if'],
     [/^\belif\b/, 'elif'],
     [/^\belse\b/, 'else'],
@@ -134,7 +134,7 @@ export class Color {
                 return this.getNextToken();
             }
             
-            this._makeNewString(tokenValue);
+            this._makeNewString(tokenValue, tokenType);
 
             return {
                 tokenType,
@@ -154,18 +154,32 @@ export class Color {
         return matched[0];
     }
 
-    _makeNewString(tokenValue) {
+    _makeNewString(tokenValue, tokenType) {
         let s = '';
         for(let i=0; i<this._curr; i++){
             s+=this._string[i];
         }
 
-        let addSpan = `<span className='abc'>${tokenValue}</span>`
+        console.log(tokenType);
+
+        let colorToBeAdded = '';
+        switch(tokenType){
+            case ('let'):
+                colorToBeAdded = 'skyblue';
+                break;
+            case ('IDENTIFIER'):
+                colorToBeAdded = 'redorange';
+                break;
+            case ('SIMPLE_ASSIGN'):
+                colorToBeAdded = 'yellow';
+                break;
+        }
+        let addSpan = `<span style="color: ${colorToBeAdded};">${tokenValue}</span>`
         s+=addSpan;
         for(let i=this._cursor; i<this._string.length; i++){
             s+=this._string[i];
         }
-        this._cursor = this._curr + addSpan.length;
+        this._cursor = this._curr + addSpan.length + 1;
         this._curr = this._cursor;
         this._string = s;
     }

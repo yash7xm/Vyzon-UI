@@ -22,7 +22,7 @@ function Editor() {
                 <textarea name="" id="" onChange={handleContentChange} value={code}></textarea>
             </div>
             <div className="para">
-            <p dangerouslySetInnerHTML={{ __html: _code }}></p>
+                <p dangerouslySetInnerHTML={{ __html: _code }}></p>
             </div>
         </div>
     );
