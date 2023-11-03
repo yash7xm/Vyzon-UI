@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import '../assets/Styles/Editor.css'
+import { Color } from '../assets/Helper/Color';
+
+const color = new Color();
 
 function Editor() {
     const [code, setCode] = useState('');
     const [_code, _setCode] = useState('');
 
     const handleContentChange = (e) => {
-        const _string = e.target.value;
-        let _codeT = _string;
-        if (_string === 'let') {
-            console.log(_string);
-            _codeT = <span style={{ color: 'red' }}>{_string}</span>;
-        }
-
-        _setCode(_codeT);
+        let _string = e.target.value;
+        color.init(_string);
+        console.log(color.getColor());
+        _setCode(color.getColor());
         setCode(_string);
     }
 
@@ -23,7 +22,7 @@ function Editor() {
                 <textarea name="" id="" onChange={handleContentChange} value={code}></textarea>
             </div>
             <div className="para">
-                <p>{_code}</p>
+            <p dangerouslySetInnerHTML={{ __html: _code }}></p>
             </div>
         </div>
     );

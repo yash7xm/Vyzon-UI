@@ -31,7 +31,10 @@
     pointer-events: none;
     border: 1px solid #3a3a3a;
     border-radius: 10px;
-    color: steelblue;
+  }
+
+  .abc {
+    color: blue;
   }
 
 
