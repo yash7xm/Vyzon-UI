@@ -1,7 +1,7 @@
 const Spec = [
     // --------------------------------------
     // Whitespace:
-    [/^\s+/, 'space'],
+    [/^\s+/, null],
 
     // --------------------------------------
     // Comments:
@@ -168,10 +168,13 @@ export class Color {
                 colorToBeAdded = 'skyblue';
                 break;
             case ('IDENTIFIER'):
-                colorToBeAdded = 'redorange';
+                colorToBeAdded = 'orange';
                 break;
             case ('SIMPLE_ASSIGN'):
                 colorToBeAdded = 'yellow';
+                break;
+            case ('NUMBER'):
+                colorToBeAdded = 'green';
                 break;
         }
         let addSpan = `<span style="color: ${colorToBeAdded};">${tokenValue}</span>`
