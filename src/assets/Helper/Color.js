@@ -1,7 +1,7 @@
 const Spec = [
     // --------------------------------------
     // Whitespace:
-    [/^\s+/, null],
+    [/^\s+/, 'space'],
 
     // --------------------------------------
     // Comments:
@@ -155,6 +155,11 @@ export class Color {
     }
 
     _makeNewString(tokenValue, tokenType) {
+        if(tokenType === 'space') {
+            this._curr = this._cursor;
+            return;
+        }
+
         let s = '';
         for(let i=0; i<this._curr; i++){
             s+=this._string[i];
